@@ -73,8 +73,7 @@ class TestCollector(TestCase):
 
             def run(self):
                 collector = collector_class(
-                    self.streamer, 'sockets', callback_time=0.1,
-                    io_loop=self.loop)
+                    self.streamer, 'sockets', callback_time=0.1)
                 collector.start()
                 self.loop.start()
 

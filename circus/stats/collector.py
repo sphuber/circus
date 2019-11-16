@@ -10,9 +10,8 @@ from tornado import ioloop
 
 class BaseStatsCollector(ioloop.PeriodicCallback):
 
-    def __init__(self, streamer, name, callback_time=1., io_loop=None):
-        ioloop.PeriodicCallback.__init__(self, self._callback,
-                                         callback_time * 1000, io_loop)
+    def __init__(self, streamer, name, callback_time=1.):
+        ioloop.PeriodicCallback.__init__(self, self._callback, callback_time * 1000)
         self.streamer = streamer
         self.name = name
 
@@ -105,13 +104,11 @@ _LOOP_RES = 10
 
 class SocketStatsCollector(BaseStatsCollector):
 
-    def __init__(self, streamer, name, callback_time=1., io_loop=None):
-        super(SocketStatsCollector, self).__init__(streamer, name,
-                                                   callback_time, io_loop)
+    def __init__(self, streamer, name, callback_time=1.):
+        super(SocketStatsCollector, self).__init__(streamer, name, callback_time)
         self._rstats = defaultdict(int)
         self.sockets = [sock for sock, address, fd in self.streamer.sockets]
-        self._p = ioloop.PeriodicCallback(self._select, _LOOP_RES,
-                                          io_loop=io_loop)
+        self._p = ioloop.PeriodicCallback(self._select, _LOOP_RES)
 
     def start(self):
         self._p.start()

@@ -16,5 +16,5 @@ class Controller(_Controller):
     def start(self):
         self.initialize()
         self.caller = ioloop.PeriodicCallback(self.arbiter.manage_watchers,
-                                              self.check_delay, self.loop)
+                                              self.check_delay)
         self.caller.start()
