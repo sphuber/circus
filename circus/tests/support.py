@@ -25,7 +25,7 @@ except ImportError:
     from unittest2 import findTestCases  # NOQA
 
 from tornado.testing import AsyncTestCase
-from zmq.eventloop import ioloop
+from tornado import ioloop
 import mock
 import tornado
 
@@ -36,7 +36,6 @@ from circus.util import tornado_sleep, ConflictError
 from circus.util import IS_WINDOWS
 from circus.watcher import Watcher
 
-ioloop.install()
 if 'ASYNC_TEST_TIMEOUT' not in os.environ:
     os.environ['ASYNC_TEST_TIMEOUT'] = '30'
 
