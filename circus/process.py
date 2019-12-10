@@ -227,7 +227,7 @@ class Process(object):
                 try:
                     stream.flush()
                     os.dup2(devnull, stream.fileno())
-                except IOError:
+                except (AttributeError, IOError):
                     # some streams, like stdin - might be already closed.
                     pass
         finally:
